@@ -1,20 +1,20 @@
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Automate Cellulaire</title>
-    <style>
-        /* form {
-            margin: 1em;
-        } */
-    </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <form>
         <label for="nb_lignes">Nombre de lignes</label>
         <input type="number" min="0" id="nb_lignes" value="100" /> <br />
 
         <label for="nb_colonnes">Nombre de colonnes</label>
         <input type="number" min="0" id="nb_colonnes" value="100" /> <br />
+
+        <label for="regle">Règle</label>
+        <input type="number" min="1" max="255" id="regle" value="110" /> <br />
 
         <fieldset>
             <legend>Mode d'initialisation</legend>
@@ -32,17 +32,20 @@
             <legend>Mode de la gestion d'extrémité des lignes</legend>
             <div>
                 <input type="radio" name="mode_extremite" id="mode_miroir" value="miroir" checked="checked" />
-                <label for="mode_miroir">Mode miroir (le voisin de gauche de la première cellule a le même état que la première cellule)</label>
+                <label for="mode_miroir">Mode miroir (le voisin de gauche de la première cellule a le même état que la
+                    première cellule)</label>
             </div>
             <div>
                 <input type="radio" name="mode_extremite" id="mode_torique" value="torique" />
-                <label for="mode_torique">Mode torique (le voisin de gauche de la première cellule est la dernière cellule)</label>
+                <label for="mode_torique">Mode torique (le voisin de gauche de la première cellule est la dernière
+                    cellule)</label>
             </div>
         </fieldset> <br />
 
-        <input type="button" id="bouton_generer" name="generer" value="Générer" onclick="lancerGeneration()"/>
+        <input type="button" id="bouton_generer" name="generer" value="Générer" onclick="lancerGeneration()" />
     </form>
     <canvas id="canvas"></canvas>
     <script type="text/javascript" src="automate.js"></script>
-  </body>
+</body>
+
 </html>
