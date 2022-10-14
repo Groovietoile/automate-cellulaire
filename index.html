@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Automate Cellulaire</title>
+    <style>
+        /* form {
+            margin: 1em;
+        } */
+    </style>
+  </head>
+  <body>
+    <form>
+        <label for="nb_lignes">Nombre de lignes</label>
+        <input type="number" min="0" id="nb_lignes" value="100" /> <br />
+
+        <label for="nb_colonnes">Nombre de colonnes</label>
+        <input type="number" min="0" id="nb_colonnes" value="100" /> <br />
+
+        <fieldset>
+            <legend>Mode d'initialisation</legend>
+            <div>
+                <input type="radio" name="mode_init" id="mode_aleatoire" value="aleatoire" checked="checked" />
+                <label for="mode_aleatoire">Première génération fixée aléatoirement</label>
+            </div>
+            <div>
+                <input type="radio" name="mode_init" id="mode_seul" value="seul" />
+                <label for="mode_seul">Seule la première cellule de la ligne a pour état 1</label>
+            </div>
+        </fieldset> <br />
+
+        <fieldset>
+            <legend>Mode de la gestion d'extrémité des lignes</legend>
+            <div>
+                <input type="radio" name="mode_extremite" id="mode_miroir" value="miroir" checked="checked" />
+                <label for="mode_miroir">Mode miroir (le voisin de gauche de la première cellule a le même état que la première cellule)</label>
+            </div>
+            <div>
+                <input type="radio" name="mode_extremite" id="mode_torique" value="torique" />
+                <label for="mode_torique">Mode torique (le voisin de gauche de la première cellule est la dernière cellule)</label>
+            </div>
+        </fieldset> <br />
+
+        <input type="button" id="bouton_generer" name="generer" value="Générer" onclick="lancerGeneration()"/>
+    </form>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="automate.js"></script>
+  </body>
+</html>
