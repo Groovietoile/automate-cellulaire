@@ -27,7 +27,6 @@ function initialisationAleatoire() {
         this.cellules[0][i] = Math.floor(Math.random() * 2);
         dessinerCellule(0, i);
     }
-    console.log(this.cellules);
 }
 
 function initialisationSeule() {
