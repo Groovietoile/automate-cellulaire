@@ -69,7 +69,7 @@ function getVoisinDeDroite(i, j) {
 }
 
 function genererCellule(i, j) {
-    var voisinDeGauche = (j - 1 > 0) ? this.cellules[i - 1][j - 1] : getVoisinDeGauche(i - 1, j);
+    var voisinDeGauche = (j - 1 >= 0) ? this.cellules[i - 1][j - 1] : getVoisinDeGauche(i - 1, j);
     var voisinDeDroite = (j + 1 < this.nbColonnes) ? this.cellules[i - 1][j + 1] : getVoisinDeDroite(i - 1, j);
     var cellulePrecedente = this.cellules[i - 1][j];
 
