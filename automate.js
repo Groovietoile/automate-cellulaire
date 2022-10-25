@@ -6,15 +6,13 @@ function initialisationCanvas() {
     this.canvas.width = this.nbColonnes * this.tailleCellule;
     this.canvas.height = this.nbLignes * this.tailleCellule;
     this.cellules = new Array(this.nbLignes);
-    for (var i = 0; i < this.cellules; i++) {
+    for (let i = 0; i < this.cellules.length; i++) {
         this.cellules[i] = new Array(this.nbColonnes);
     }
 
     this.regleBinaire = Number(document.getElementById("regle").value).toString(2);
     // règle sur 8 bits
-    while (regleBinaire.length < 8) {
-        regleBinaire = "0" + regleBinaire;
-    }
+    regleBinaire = regleBinaire.padStart(8, '0');
 
     this.modeInit = document.querySelector('input[name="mode_init"]:checked').value;
     this.modeExtremite = document.querySelector('input[name="mode_extremite"]:checked').value;
@@ -23,7 +21,7 @@ function initialisationCanvas() {
 }
 
 function initialisationAleatoire() {
-    for (var i = 0; i < this.nbColonnes; i++) {
+    for (let i = 0; i < this.nbColonnes; i++) {
         this.cellules[0][i] = Math.floor(Math.random() * 2);
         dessinerCellule(0, i);
     }
@@ -32,7 +30,7 @@ function initialisationAleatoire() {
 function initialisationSeule() {
     this.cellules[0][0] = 1;
     dessinerCellule(0, 0);
-    for (var i = 1; i < this.nbColonnes; i++) {
+    for (let i = 1; i < this.nbColonnes; i++) {
         this.cellules[0][i] = 0;
         dessinerCellule(0, i);
     }
@@ -69,30 +67,21 @@ function getVoisinDeDroite(i, j) {
 }
 
 function genererCellule(i, j) {
-    var voisinDeGauche = (j - 1 >= 0) ? this.cellules[i - 1][j - 1] : getVoisinDeGauche(i - 1, j);
-    var voisinDeDroite = (j + 1 < this.nbColonnes) ? this.cellules[i - 1][j + 1] : getVoisinDeDroite(i - 1, j);
-    var cellulePrecedente = this.cellules[i - 1][j];
+    let voisinDeGauche = (j - 1 >= 0) ? this.cellules[i - 1][j - 1] : getVoisinDeGauche(i - 1, j);
+    let voisinDeDroite = (j + 1 < this.nbColonnes) ? this.cellules[i - 1][j + 1] : getVoisinDeDroite(i - 1, j);
+    let cellulePrecedente = this.cellules[i - 1][j];
 
-    var cellulePrecedenteEtSesVoisins = `${voisinDeGauche}${cellulePrecedente}${voisinDeDroite}`;
-    var kBinaire;
-    // vérification de la correspondance pour chaque nombre de 0 à 7 en binaire
-    for (var k = 0; k < 8; k++) {
-        kBinaire = Number(k).toString(2);
-        // k sur 3 bits
-        while (kBinaire.length < 3) {
-            kBinaire = "0" + kBinaire;
-        }
-        if (cellulePrecedenteEtSesVoisins === kBinaire) {
-            // 111 correspond au caractère à l'indice 0
-            return Number(this.regleBinaire.charAt(7 - k));
-        }
-    }
+    // représentation en base 10
+    let cellulePrecedenteEtSesVoisins = voisinDeGauche * 4 + cellulePrecedente * 2 + voisinDeDroite;
+
+    // correspondance avec la règle
+    return Number(this.regleBinaire.charAt(7 - cellulePrecedenteEtSesVoisins));
 }
 
 function generer() {
-    for (i = 1; i < this.nbLignes; i++) {
+    for (let i = 1; i < this.nbLignes; i++) {
         this.cellules[i] = new Array(this.nbColonnes);
-        for (j = 0; j < this.nbColonnes; j++) {
+        for (let j = 0; j < this.nbColonnes; j++) {
             this.cellules[i][j] = genererCellule(i, j);
             dessinerCellule(i, j);
         }
